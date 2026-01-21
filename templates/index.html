@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main-container">
+        <div class="form-card">
+            <div class="header">
+                <h1>🏡 House Price Predictor</h1>
+                <p>Enter property details below to get an estimated market value.</p>
+            </div>
+
+            <form action="/predict" method="post">
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="OverallQual">Overall Quality (1-10)</label>
+                        <input type="number" id="OverallQual" name="OverallQual" placeholder="e.g., 7" required min="1" max="10">
+                        <small>Rates the overall material and finish of the house.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="GrLivArea">Above Grade Living Area (sq ft)</label>
+                        <input type="number" id="GrLivArea" name="GrLivArea" placeholder="e.g., 1500" required min="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="TotalBsmtSF">Total Basement Area (sq ft)</label>
+                        <input type="number" id="TotalBsmtSF" name="TotalBsmtSF" placeholder="e.g., 800" required min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="GarageCars">Size of Garage (Car Capacity)</label>
+                        <input type="number" id="GarageCars" name="GarageCars" placeholder="e.g., 2" required min="0" max="5">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="FullBath">Full Bathrooms Above Grade</label>
+                        <input type="number" id="FullBath" name="FullBath" placeholder="e.g., 2" required min="0" max="5">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="YearBuilt">Original Construction Year</label>
+                        <input type="number" id="YearBuilt" name="YearBuilt" placeholder="e.g., 1995" required min="1800" max="2026">
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Predict Price</button>
+            </form>
+
+            {% if prediction_text %}
+            <div class="result-box">
+                <h3>{{ prediction_text }}</h3>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</body>
+</html>
